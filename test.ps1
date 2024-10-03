@@ -75,31 +75,35 @@ function cal {
             # Revisar los días de la semana actual y resaltar si coincide con el día actual
             # ----------------------------------------------------------------------------
             for ($j = 0; $j -lt 7; $j++) {
-                $curLine += "{0,2} " -f $curWeek[$j]
-                # if (($curWeek[$j].Trim() -eq $today.Day.ToString()) -and ($curMonth -eq $today.Month) -and ($curYear -eq $today.Year)) {
-                #     # Imprimir el día actual en rojo
-                #     $curLine += ("{0,2} " -f $curWeek[$j]) -replace " ", "`t"
-                #     Write-Host -NoNewline -ForegroundColor Red ("{0,2} " -f $curWeek[$j])
-                # } else {
-                #     $curLine += "{0,2} " -f $curWeek[$j]
-                # }
+                if (($curWeek[$j].Trim() -eq $today.Day.ToString()) -and ($curMonth -eq $today.Month) -and ($curYear -eq $today.Year)) {
+                    # Imprimir el día actual en rojo
+                    $curLine += ("{0,2} " -f $curWeek[$j]) -replace " ", "`t"
+                    Write-Host "------------------------"
+                    Write-Host -NoNewline -ForegroundColor Red ("{0,2} " -f $curWeek[$j])
+                } else {
+                    $curLine += "{0,2} " -f $curWeek[$j]
+                }
 
                 # $curLine += "{0,2} " -f $curWeek[$j]
             }
 
-
-
+            # Ahora imprimimos la línea entera, aplicando color solo en el día actual
+            for ($j = 0; $j -lt 7; $j++) {
+                if (($curWeek[$j].Trim() -eq $today.Day.ToString()) -and ($curMonth -eq $today.Month) -and ($curYear -eq $today.Year)) {
+                    Write-Host -NoNewline -ForegroundColor Red ("{0,2} " -f $curWeek[$j])
+                } else {
+                    Write-Host -NoNewline ("{0,2} " -f $curWeek[$j])
+                }
+            }
+             # Para completar la línea y hacer el salto de línea
             # for ($j = 0; $j -lt 7; $j++) {
             #     if (($curWeek[$j].Trim() -eq $today.Day.ToString()) -and ($curMonth -eq $today.Month) -and ($curYear -eq $today.Year)) {
             #         # Imprimir el día actual en rojo
             #         $curLine += ("{0,2} " -f $curWeek[$j]) -replace " ", "`t"
-            #         Write-Host "------------------------"
             #         Write-Host -NoNewline -ForegroundColor Red ("{0,2} " -f $curWeek[$j])
             #     } else {
             #         $curLine += "{0,2} " -f $curWeek[$j]
             #     }
-
-            #     # $curLine += "{0,2} " -f $curWeek[$j]
             # }
             # ----------------------------------------------------------------------------
 
